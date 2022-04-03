@@ -14,7 +14,7 @@ pygame.key.set_repeat(10, 15)
 setting_bg = pygame.Surface((400, 400))
 setting_bg.fill((230, 230, 230))
 
-version = "14.4.2"
+version = "15.1.2"
 black_move = 0
 lan_move = 0
 open_black = 0
@@ -63,6 +63,7 @@ input_lan = ["请输入您的密钥:", "Please enter your key:", "Veuillez saisi
              "Введите ваш ключ:", "鍵を入力してください:"]
 key_error_lan = ["您输入的密钥有误!", "The key you entered is incorrect!", "La clé que yous aver saisie est incorrecte!",
                  "Ha introducido la clave equivocada!", "Ошибка при вводе ключа!", "入力した鍵が間違っています。"]
+buy_lan = ["购买","Get it","Achetez - le.","Cómpralo.","купить","購入"]
 
 try:
     lan_f = open("lan", "r", encoding='utf-8')
@@ -159,6 +160,11 @@ class Key:
 
     def welcome(self):
         global key_days, ser_lan, key_error_lan, input_lan
+        qian_my = easygui.buttonbox(ser_lan[e] + self.key + "\n\n" + input_lan[e], "Setup",["OK",buy_lan[e]])
+        if qian_my == None:
+            sys.exit()
+        if qian_my == buy_lan[e]:
+            os.system("start Get.html")
         my = easygui.enterbox(ser_lan[e] + self.key + "\n\n" + input_lan[e], "Setup")
         if my is None:
             sys.exit()
