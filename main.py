@@ -1059,10 +1059,13 @@ else:
 # ______________________________________________________________________________________________________________________
 old_FPS_time = time.time()
 web = "https://api.github.com/repos/yzkrz/Draw/releases/latest"
-all_web_info = requests.get(web).json()
-latest = all_web_info["tag_name"][8:]
-if latest > version:
-    print("Up")
+try:
+    all_web_info = requests.get(web, timeout=1).json()
+    latest = all_web_info["tag_name"][8:]
+    if latest > version:
+        print("Up")
+except requests.exceptions.ConnectTimeout:
+    print("Timeout")
 while True:
     last_txt = 0
     for i in range(len(name)):
