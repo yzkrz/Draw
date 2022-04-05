@@ -15,7 +15,7 @@ pygame.key.set_repeat(10, 15)
 setting_bg = pygame.Surface((400, 400))
 setting_bg.fill((230, 230, 230))
 
-version = "16.1.1"
+version = "16.1.2"
 black_move = 0
 lan_move = 0
 open_black = 0
