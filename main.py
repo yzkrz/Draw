@@ -7,6 +7,7 @@ import easygui
 import pygame
 from random import randint
 from sys import exit
+import requests
 
 pygame.init()
 pygame.mixer.init()
@@ -14,7 +15,7 @@ pygame.key.set_repeat(10, 15)
 setting_bg = pygame.Surface((400, 400))
 setting_bg.fill((230, 230, 230))
 
-version = "15.1.2"
+version = "16.1.1"
 black_move = 0
 lan_move = 0
 open_black = 0
@@ -63,7 +64,7 @@ input_lan = ["请输入您的密钥:", "Please enter your key:", "Veuillez saisi
              "Введите ваш ключ:", "鍵を入力してください:"]
 key_error_lan = ["您输入的密钥有误!", "The key you entered is incorrect!", "La clé que yous aver saisie est incorrecte!",
                  "Ha introducido la clave equivocada!", "Ошибка при вводе ключа!", "入力した鍵が間違っています。"]
-buy_lan = ["购买","Get it","Achetez - le.","Cómpralo.","купить","購入"]
+buy_lan = ["购买", "Get it", "Achetez - le.", "Cómpralo.", "купить", "購入"]
 
 try:
     lan_f = open("lan", "r", encoding='utf-8')
@@ -160,8 +161,8 @@ class Key:
 
     def welcome(self):
         global key_days, ser_lan, key_error_lan, input_lan
-        qian_my = easygui.buttonbox(ser_lan[e] + self.key + "\n\n" + input_lan[e], "Setup",["OK",buy_lan[e]])
-        if qian_my == None:
+        qian_my = easygui.buttonbox(ser_lan[e] + self.key + "\n\n" + input_lan[e], "Setup", ["OK", buy_lan[e]])
+        if qian_my is None:
             sys.exit()
         if qian_my == buy_lan[e]:
             os.system("start Get.html")
@@ -608,8 +609,8 @@ def input_rs():
 
     pygame.draw.rect(screen, (243, 243, 243), (-2 + rs_x, -20, 404, 70), 0, border_radius=21)
     pygame.draw.rect(screen, (150, 150, 150), (-2 + rs_x, -18, 404, 70), 2, border_radius=21)
-    paint_text("<    " + installed_language[selected_language][8], (0, 0, 0), (243, 243, 243),
-               18 + rs_x, 7, "xy", True, 23)
+    paint_text("<    " + installed_language[selected_language][8], (0, 0, 0), (243, 243, 243), 18 + rs_x, 7, "xy", True,
+               23)
     pygame.draw.line(screen, (177, 177, 177), (50 + rs_x, 5), (50 + rs_x, 45))
 
     paint_text(installed_language[selected_language][9], (0, 0, 0), (230, 230, 230), 200 + rs_x, 100, "center", True,
@@ -699,8 +700,8 @@ def input_fcl():
     pygame.draw.rect(screen, (243, 243, 243), (-2 + fcl_x, -20, 404, 70), 0, border_radius=21)
     pygame.draw.rect(screen, (150, 150, 150), (-2 + fcl_x, -18, 404, 70), 2, border_radius=21)
     paint_text("<    ", (0, 0, 0), (243, 243, 243), 18 + fcl_x, 7, "xy", True, 23)
-    paint_text(installed_language[selected_language][11], (0, 0, 0), (243, 243, 243),
-               60 + fcl_x, 7 + fcl_title_text_y, "xy", True, fcl_title_text_sise)
+    paint_text(installed_language[selected_language][11], (0, 0, 0), (243, 243, 243), 60 + fcl_x, 7 + fcl_title_text_y,
+               "xy", True, fcl_title_text_sise)
     pygame.draw.line(screen, (177, 177, 177), (50 + fcl_x, 5), (50 + fcl_x, 45))
 
     paint_text(installed_language[selected_language][11], (0, 0, 0), (230, 230, 230), 200 + fcl_x, 100, "center", True,
@@ -776,18 +777,18 @@ def history():
 
     if l_list:
         pygame.draw.rect(screen, (100, 150, 255), (150 + his_x, 250, 100, 50), 0, 20)
-        paint_text(installed_language[selected_language][14], (255, 255, 255), (100, 150, 255),
-                   200 + his_x, 275, "center", True, 22)
+        paint_text(installed_language[selected_language][14], (255, 255, 255), (100, 150, 255), 200 + his_x, 275,
+                   "center", True, 22)
 
     pygame.draw.rect(screen, (243, 243, 243), (-2 + his_x, -20, 404, 70), 0, border_radius=21)
     pygame.draw.rect(screen, (150, 150, 150), (-2 + his_x, -18, 404, 70), 2, border_radius=21)
-    paint_text("<    " + installed_language[selected_language][12], (0, 0, 0), (243, 243, 243),
-               18 + his_x, 7, "xy", True, 23)
+    paint_text("<    " + installed_language[selected_language][12], (0, 0, 0), (243, 243, 243), 18 + his_x, 7, "xy",
+               True, 23)
     pygame.draw.line(screen, (177, 177, 177), (50 + his_x, 5), (50 + his_x, 45))
 
     if txt_y > 220:
-        paint_text(installed_language[selected_language][19], (40, 123, 222), (230, 230, 230),
-                   15 + his_x, 360, "xy", True, 20)
+        paint_text(installed_language[selected_language][19], (40, 123, 222), (230, 230, 230), 15 + his_x, 360, "xy",
+                   True, 20)
         paint_text("...", (0, 0, 0), (230, 230, 230), 41 + his_x, 250, "xy", True, 18)
 
 
@@ -840,13 +841,11 @@ def blacking():
 
     for i in range(1, sum_data + 1):
         if 400 >= (title_height + margin * i + black_move + height * (i - 1)) >= -50:
-            pygame.draw.rect(screen, (255, 255, 255),
-                             (margin * 2 + black_x, title_height + margin * i + black_move + height * (i - 1),
-                              width, height), 0,
+            pygame.draw.rect(screen, (255, 255, 255), (
+                margin * 2 + black_x, title_height + margin * i + black_move + height * (i - 1), width, height), 0,
                              border_radius=21)
-            pygame.draw.rect(screen, (150, 150, 150),
-                             (margin * 2 + black_x, title_height + margin * i + black_move + height * (i - 1),
-                              width, height), 2,
+            pygame.draw.rect(screen, (150, 150, 150), (
+                margin * 2 + black_x, title_height + margin * i + black_move + height * (i - 1), width, height), 2,
                              border_radius=21)
             paint_text(str(i), (0, 0, 0), (255, 255, 255), int(margin * 2 + 20) + black_x,
                        int(title_height + margin * i + black_move + height * (i - 1) + 11), "xy", True, 20)
@@ -859,7 +858,7 @@ def blacking():
     if black_move <= -(title_height * 2 + margin * (sum_data + 1) + height * (sum_data - 1) - 400):
         black_move = -(title_height * 2 + margin * (sum_data + 1) + height * (sum_data - 1) - 400)
 
-    small_title_y = int((400-black_x)/10) + 55
+    small_title_y = int((400 - black_x) / 10) + 55
     if small_title_y >= 85:
         small_title_y = 85
     pygame.draw.rect(screen, (230, 230, 230), (-5, -5, 410, small_title_y))
@@ -878,8 +877,8 @@ def blacking():
         bla_size = 12
     else:
         bla_size = 15
-    paint_text(installed_language[selected_language][17], (0, 0, 0), (230, 230, 230), 200, small_title_y - 20,
-               "center", True, bla_size)
+    paint_text(installed_language[selected_language][17], (0, 0, 0), (230, 230, 230), 200, small_title_y - 20, "center",
+               True, bla_size)
 
     pygame.draw.rect(screen, (243, 243, 243), (-2, -20, 404, 70), 0, border_radius=21)
     pygame.draw.rect(screen, (150, 150, 150), (-2, -18, 404, 70), 2, border_radius=21)
@@ -914,8 +913,8 @@ def ch_lan():
 
     pygame.draw.rect(screen, (243, 243, 243), (-2 + ch_lan_x, -20, 404, 70), 0, border_radius=21)
     pygame.draw.rect(screen, (150, 150, 150), (-2 + ch_lan_x, -18, 404, 70), 2, border_radius=21)
-    paint_text("<    " + installed_language[selected_language][6], (0, 0, 0), (243, 243, 243),
-               18 + ch_lan_x, 7, "xy", True, 23)
+    paint_text("<    " + installed_language[selected_language][6], (0, 0, 0), (243, 243, 243), 18 + ch_lan_x, 7, "xy",
+               True, 23)
     pygame.draw.line(screen, (177, 177, 177), (50 + ch_lan_x, 5), (50 + ch_lan_x, 45))
     if selected_language == "Français":
         ch_size = 15
@@ -1059,6 +1058,11 @@ else:
 
 # ______________________________________________________________________________________________________________________
 old_FPS_time = time.time()
+web = "https://api.github.com/repos/yzkrz/Draw/releases/latest"
+all_web_info = requests.get(web).json()
+latest = all_web_info["tag_name"][8:]
+if latest > version:
+    print("Up")
 while True:
     last_txt = 0
     for i in range(len(name)):
