@@ -15,7 +15,7 @@ pygame.key.set_repeat(10, 15)
 setting_bg = pygame.Surface((400, 400))
 setting_bg.fill((230, 230, 230))
 
-version = "16.3.1"
+version = "16.3.3"
 black_move = 0
 lan_move = 0
 open_black = 0
@@ -168,7 +168,7 @@ class Key:
         if qian_my is None:
             sys.exit()
         if qian_my == buy_lan[e]:
-            os.system("start Get.html")
+            os.system("start https://afdian.net/@yzkrz_Draw")
         my = easygui.enterbox(ser_lan[e] + self.key + "\n\n" + input_lan[e], "Setup")
         if my is None:
             sys.exit()
@@ -349,7 +349,7 @@ def get():
                     should_setting = 0
                 if new_version:
                     if 370 <= x <= 400 and 370 <= y <= 400:
-                        os.system("start new.html")
+                        os.system("start https://www.github.com/yzkrz/Draw/releases/latest")
             if setting_open:
                 if setting_x <= 0:
                     if 0 <= x <= 50 and 0 <= y <= 50:
