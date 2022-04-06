@@ -15,7 +15,7 @@ pygame.key.set_repeat(10, 15)
 setting_bg = pygame.Surface((400, 400))
 setting_bg.fill((230, 230, 230))
 
-version = "16.3.3"
+version = "16.3.4"
 black_move = 0
 lan_move = 0
 open_black = 0
@@ -399,7 +399,7 @@ def get():
                             xyz = "6"
                         else:
                             xyz = 2
-                        os.system('start xy\\' + xyz + '.html')
+                        os.system('start https://github.com/yzkrz/Draw_files/blob/main/xy/' + xyz +'.md')
 
                     if 50 <= x <= 350 and 150 <= y <= 200:
                         open_black += 1
