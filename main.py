@@ -75,8 +75,11 @@ except FileNotFoundError:
                                           ["汉语", "English", "Français", "Español", "русский язык", "日本語"])
     if selected_language is None:
         sys.exit()
-
-f16 = open("C:\\Draw\\lan", "w", encoding='utf-8')
+try:
+    f16 = open("C:\\Draw\\lan", "w", encoding='utf-8')
+except FileNotFoundError:
+    os.mkdir("C:\\Draw\\")
+    f16 = open("C:\\Draw\\lan", "w", encoding='utf-8')
 f16.write(str(selected_language))
 f16.close()
 
