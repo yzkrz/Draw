@@ -272,6 +272,7 @@ languages = list(installed_language.keys())
 
 settings = pygame.image.load("settings.png")
 Error = pygame.image.load("Error.jpg")
+update = pygame.image.load("up.png")
 
 try:
     d_f = open("data", "r")
@@ -343,10 +344,14 @@ def get():
                 if 360 <= x <= 400 and 0 <= y <= 40:
                     setting_open = True
                     should_setting = 0
+                if new_version:
+                    if 370 <= x <= 400 and 370 <= y <= 400:
+                        os.system("start new.html")
             if setting_open:
                 if setting_x <= 0:
                     if 0 <= x <= 50 and 0 <= y <= 50:
-                        if (not ch_lan_open) and (not rs_open) and (not fcl_open):
+                        if (not ch_lan_open) and (not rs_open) and (not fcl_open) and (not his_open) \
+                                and (not black_open):
                             should_setting = 400
                             state = "start"
                     if 310 <= x <= 335 and 90 <= y <= 115:
@@ -1064,8 +1069,12 @@ try:
     latest = all_web_info["tag_name"][8:]
     if latest > version:
         print("Up")
+        new_version = True
+    else:
+        new_version = False
 except requests.exceptions.ConnectTimeout:
     print("Timeout")
+    new_version = False
 while True:
     last_txt = 0
     for i in range(len(name)):
@@ -1096,6 +1105,8 @@ while True:
         paint_text(str(randint(1, len(name))), (255, 0, 0), (230, 230, 230), 200, 150, "center", True, 150)
         paint_text(installed_language[selected_language][2], (255, 255, 255), (100, 150, 255), 200, 336, "center", True,
                    32)
+        if new_version:
+            screen.blit(update, (360, 360))
     elif state == "result":
         screen.blit(settings, (355, 0))
         pygame.draw.rect(screen, (100, 150, 255), (75, 300, 250, 75), 0, border_radius=20)
@@ -1104,6 +1115,8 @@ while True:
         paint_text(str(name_range), (255, 0, 0), (230, 230, 230), 200, 150, "center", True, 150)
         paint_text(installed_language[selected_language][3], (255, 255, 255), (100, 150, 255), 200, 336, "center", True,
                    32)
+        if new_version:
+            screen.blit(update, (360, 360))
     elif state == "start":
         screen.blit(settings, (355, 0))
         pygame.draw.rect(screen, (100, 150, 255), (75, 300, 250, 75), 0, border_radius=20)
@@ -1111,6 +1124,8 @@ while True:
         paint_text(installed_language[selected_language][1], (0, 0, 0), (230, 230, 230), 70, 26, "xy", True, 20)
         paint_text(installed_language[selected_language][4], (255, 255, 255), (100, 150, 255), 200, 336, "center", True,
                    32)
+        if new_version:
+            screen.blit(update, (360, 360))
     if setting_open:
         if setting_x < should_setting:
             setting_x += 40
