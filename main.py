@@ -15,7 +15,7 @@ pygame.key.set_repeat(10, 15)
 setting_bg = pygame.Surface((400, 400))
 setting_bg.fill((230, 230, 230))
 
-version = "16.2.1"
+version = "16.3.1"
 black_move = 0
 lan_move = 0
 open_black = 0
@@ -45,7 +45,7 @@ black_x = 400
 should_black = 400
 black_open = False
 
-# bf = open("data", "r")
+# bf = open("C:\\Draw\\data", "r")
 # data_file = eval(bf.read())
 # bf.close()
 
@@ -67,7 +67,7 @@ key_error_lan = ["您输入的密钥有误!", "The key you entered is incorrect!
 buy_lan = ["购买", "Get it", "Achetez - le.", "Cómpralo.", "купить", "購入"]
 
 try:
-    lan_f = open("lan", "r", encoding='utf-8')
+    lan_f = open("C:\\Draw\\lan", "r", encoding='utf-8')
     selected_language = lan_f.read()
     lan_f.close()
 except FileNotFoundError:
@@ -76,7 +76,7 @@ except FileNotFoundError:
     if selected_language is None:
         sys.exit()
 
-f16 = open("lan", "w", encoding='utf-8')
+f16 = open("C:\\Draw\\lan", "w", encoding='utf-8')
 f16.write(str(selected_language))
 f16.close()
 
@@ -104,11 +104,11 @@ class Key:
             ask1.close()
         except FileNotFoundError:
             try:
-                os.remove("key")
+                os.remove("C:\\Draw\\key")
             except FileNotFoundError:
                 pass
             try:
-                os.remove("used.dll")
+                os.remove("C:\\Draw\\used.dll")
             except FileNotFoundError:
                 pass
             try:
@@ -124,7 +124,7 @@ class Key:
 
         # noinspection PyBroadException
         try:
-            self.key_file = open("key", "r")
+            self.key_file = open("C:\\Draw\\key", "r")
             self.key = self.key_file.read()
             self.key_file.close()
             self.num_all = self.infer(self.key[0], self.key[1], self.key[2], self.key[3], self.key[4], self.key[5],
@@ -133,7 +133,7 @@ class Key:
             self.key = ""
             for _ in range(8):
                 self.key = self.key + str(random.randint(1, 9))
-            self.key_file = open("key", "w")
+            self.key_file = open("C:\\Draw\\key", "w")
             self.key_file.write(str(self.key))
             self.key_file.close()
             self.num_all = self.infer(self.key[0], self.key[1], self.key[2], self.key[3], self.key[4], self.key[5],
@@ -191,11 +191,11 @@ try:
     ask.close()
 except FileNotFoundError:
     try:
-        os.remove("key")
+        os.remove("C:\\Draw\\key")
     except FileNotFoundError:
         pass
     try:
-        os.remove("used.dll")
+        os.remove("C:\\Draw\\used.dll")
     except FileNotFoundError:
         pass
     key_lan = ["欢迎使用抽号软件", "Welcome to Draw", "Bienvenue au logiciel flash", "Bienvenido al software de numeración",
@@ -203,7 +203,7 @@ except FileNotFoundError:
 
 # noinspection PyBroadException
 try:
-    used_file = open(r"used.dll", "r")
+    used_file = open(r"C:\\Draw\\used.dll", "r")
     used = used_file.read()
     used_file.close()
     key_time = time.strptime(used, "%Y-%m-%d")
@@ -223,11 +223,11 @@ if days <= 0:
     _T1 = datetime.date.today()
     # noinspection PyUnboundLocalVariable
     _T2 = _T1 + datetime.timedelta(key_days)
-    u = open("used.dll", "w")
+    u = open("C:\\Draw\\used.dll", "w")
     u.write(str(_T2))
     u.close()
     easygui.msgbox(done_lan[e])
-    os.remove("key")
+    os.remove("C:\\Draw\\key")
     sys.exit()
 elif days <= 14:
     warning = True
@@ -275,12 +275,12 @@ Error = pygame.image.load("Error.jpg")
 update = pygame.image.load("up.png")
 
 try:
-    d_f = open("data", "r")
+    d_f = open("C:\\Draw\\data", "r")
     df = eval(d_f.read())
     d_f.close()
 except FileNotFoundError:
     df = {"1": 1, "2": 1, "3": 1, "4": 1, "5": 1}
-    d_f2 = open("data", "w")
+    d_f2 = open("C:\\Draw\\data", "w")
     d_f2.write(str(df))
     d_f2.close()
 
@@ -294,20 +294,20 @@ except KeyError:
 
 def exe_exit():
     global name, last, l_list, selected_language, useLast
-    f1 = open("last_data", "w", encoding='utf-8')
+    f1 = open("C:\\Draw\\last_data", "w", encoding='utf-8')
     f1.write(str(name))
     f1.close()
-    f2 = open("last", "w", encoding='utf-8')
+    f2 = open("C:\\Draw\\last", "w", encoding='utf-8')
     f2.write(str(last))
     f2.close()
-    f3 = open("l_list", "w", encoding='utf-8')
+    f3 = open("C:\\Draw\\l_list", "w", encoding='utf-8')
     for f3_i in l_list:
         f3.write(str(f3_i) + "\n")
     f3.close()
-    f17 = open("lan", "w", encoding='utf-8')
+    f17 = open("C:\\Draw\\lan", "w", encoding='utf-8')
     selected_language = f17.write(str(selected_language))
     f17.close()
-    f19 = open("useLast", "w", encoding='utf-8')
+    f19 = open("C:\\Draw\\useLast", "w", encoding='utf-8')
     f19.write(str(useLast))
     f19.close()
     exit(0)
@@ -431,7 +431,7 @@ def get():
                 if 0 <= x <= 50 and 0 <= y <= 50:
                     if not black_error:
                         should_black = 400
-                        bfc = open("data", "w")
+                        bfc = open("C:\\Draw\\data", "w")
                         bfc.write(str(df))
                         bfc.close()
                         name = df
@@ -660,11 +660,11 @@ def rs_ok():
                     data_error = True
                 except NameError:
                     pass
-                ns_f = open("data", "w")
+                ns_f = open("C:\\Draw\\data", "w")
                 ns_f.write(str(last_name))
                 ns_f.close()
 
-                d_f = open("data", "r")
+                d_f = open("C:\\Draw\\data", "r")
                 df = eval(d_f.read())
                 d_f.close()
 
@@ -729,7 +729,7 @@ def fcl_ok():
             if not fcl_save:
                 fcl_save = True
                 useLast = int(fcl_inputting) / 100
-                ul = open("useLast", "w")
+                ul = open("C:\\Draw\\useLast", "w")
                 ul.write(str(useLast))
                 ul.close()
 
@@ -801,7 +801,7 @@ def history_ok():
     global l_list
     l_list = []
     try:
-        os.remove("last_data")
+        os.remove("C:\\Draw\\last_data")
     except FileNotFoundError:
         pass
 
@@ -943,12 +943,12 @@ def ch_lan():
 
 total = 0
 name_range = 0
-f8 = open("data", "r", encoding='utf-8')
+f8 = open("C:\\Draw\\data", "r", encoding='utf-8')
 name = eval(f8.read())
 f8.close()
 lim = []
 try:
-    f9 = open("last", "r", encoding='utf-8')
+    f9 = open("C:\\Draw\\last", "r", encoding='utf-8')
     last = int(f9.read())
     f9.close()
 except FileNotFoundError:
@@ -957,7 +957,7 @@ except ValueError:
     last = 0
 
 try:
-    f10 = open("useLast", "r", encoding='utf-8')
+    f10 = open("C:\\Draw\\useLast", "r", encoding='utf-8')
     useLast = float(f10.read())
     f10.close()
 except FileNotFoundError:
@@ -967,11 +967,11 @@ fcl_inputting = str(int(useLast * 100))
 if not (last >= len(name) * useLast):
     # noinspection PyBroadException
     try:
-        f11 = open("last_data", "r", encoding='utf-8')
+        f11 = open("C:\\Draw\\last_data", "r", encoding='utf-8')
         name = eval(f11.read())
         f11.close()
     except:
-        f12 = open("data", "r", encoding='utf-8')
+        f12 = open("C:\\Draw\\data", "r", encoding='utf-8')
         name = eval(f12.read())
         f12.close()
 else:
@@ -986,7 +986,7 @@ if last_temp > last:
     last = last_temp
 
 try:
-    f13 = open("l_list", "r", encoding='utf-8')
+    f13 = open("C:\\Draw\\l_list", "r", encoding='utf-8')
     l_list = f13.read().split("\n")
     new_list = [i for i in l_list if i != '']
     l_list = new_list
@@ -1017,7 +1017,7 @@ def ran():
             last += 1
             l_list.append(str(name_range))
             if last >= len(name) * useLast:
-                f14 = open("data", "r", encoding='utf-8')
+                f14 = open("C:\\Draw\\data", "r", encoding='utf-8')
                 name = eval(f14.read())
                 f14.close()
                 last = 0
@@ -1092,7 +1092,7 @@ while True:
         total += name[str(1 + i)]
         lim.append([txt, txt + name[str(1 + i)] - 1])
     if last >= len(name) * useLast:
-        f15 = open("data", "r", encoding='utf-8')
+        f15 = open("C:\\Draw\\data", "r", encoding='utf-8')
         name = eval(f15.read())
         f15.close()
         last = 0
