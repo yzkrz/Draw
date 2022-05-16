@@ -15,7 +15,7 @@ pygame.key.set_repeat(10, 15)
 setting_bg = pygame.Surface((400, 400))
 setting_bg.fill((230, 230, 230))
 
-version = "16.3.7"
+version = "16.3.8"
 black_move = 0
 lan_move = 0
 open_black = 0
@@ -798,10 +798,8 @@ def history():
 
 
 def history_ok():
-    try:
-        os.remove("C:\\Draw\\last_data")
-    except FileNotFoundError:
-        pass
+    global l_list
+    l_list = []
 
 
 def blacking():
