@@ -15,7 +15,7 @@ pygame.key.set_repeat(10, 15)
 setting_bg = pygame.Surface((400, 400))
 setting_bg.fill((230, 230, 230))
 
-version = "16.3.6"
+version = "16.3.7"
 black_move = 0
 lan_move = 0
 open_black = 0
@@ -1126,7 +1126,7 @@ while True:
                    32)
         if new_version:
             pygame.draw.circle(screen, (255, 200, 15), (380, 380), 15)
-            paint_text("!", (255, 255, 255), None, 380, 380, "center", True, 22)
+            paint_text("↑", (255, 255, 255), None, 380, 380, "center", True, 22)
     if setting_open:
         if setting_x < should_setting:
             setting_x += 40
