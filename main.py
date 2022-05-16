@@ -15,7 +15,7 @@ pygame.key.set_repeat(10, 15)
 setting_bg = pygame.Surface((400, 400))
 setting_bg.fill((230, 230, 230))
 
-version = "16.3.4"
+version = "16.3.6"
 black_move = 0
 lan_move = 0
 open_black = 0
@@ -274,8 +274,6 @@ installed_language = {
 languages = list(installed_language.keys())
 
 settings = pygame.image.load("settings.png")
-Error = pygame.image.load("Error.jpg")
-update = pygame.image.load("up.png")
 
 try:
     d_f = open("C:\\Draw\\data", "r")
@@ -328,7 +326,7 @@ def get():
                     pygame.quit()
                     exe_exit()
                 else:
-                    pygame.mixer.music.load("Windows Critical Stop.wav")
+                    pygame.mixer.music.load("Error.wav")
                     pygame.mixer.music.play()
             else:
                 pygame.quit()
@@ -353,8 +351,8 @@ def get():
             if setting_open:
                 if setting_x <= 0:
                     if 0 <= x <= 50 and 0 <= y <= 50:
-                        if (not ch_lan_open) and (not rs_open) and (not fcl_open) and (not his_open) \
-                                and (not black_open):
+                        if (not ch_lan_open) and (not rs_open) and (not fcl_open) and (not his_open) and (
+                                not black_open):
                             should_setting = 400
                             state = "start"
                     if 310 <= x <= 335 and 90 <= y <= 115:
@@ -399,7 +397,7 @@ def get():
                             xyz = "6"
                         else:
                             xyz = 2
-                        os.system('start https://github.com/yzkrz/Draw_files/blob/main/xy/' + xyz +'.md')
+                        os.system('start https://gitee.com/yzkrz/Draw_files/blob/main/xy/' + xyz + '.md')
 
                     if 50 <= x <= 350 and 150 <= y <= 200:
                         open_black += 1
@@ -439,7 +437,7 @@ def get():
                         bfc.close()
                         name = df
                     else:
-                        pygame.mixer.music.load("Windows Critical Stop.wav")
+                        pygame.mixer.music.load("Error.wav")
                         pygame.mixer.music.play()
             if state == "ch_lan":
                 if 0 <= x <= 50 and 0 <= y <= 50:
@@ -582,9 +580,8 @@ def get():
             going = 1
 
 
-def paint_text(text: str, color: tuple[int, int, int], bg_color: tuple[int, int, int], x: int, y: int, mod: str,
+def paint_text(text: str, color: tuple[int, int, int], bg_color: tuple[int, int, int] or None, x: int, y: int, mod: str,
                aa: bool = True, size: int = 32):
-    # font
     font = pygame.font.Font("msyh.ttc", size)
 
     text_surface_object = font.render(text, aa, color, bg_color)
@@ -801,8 +798,6 @@ def history():
 
 
 def history_ok():
-    global l_list
-    l_list = []
     try:
         os.remove("C:\\Draw\\last_data")
     except FileNotFoundError:
@@ -1109,7 +1104,8 @@ while True:
         paint_text(installed_language[selected_language][2], (255, 255, 255), (100, 150, 255), 200, 336, "center", True,
                    32)
         if new_version:
-            screen.blit(update, (360, 360))
+            pygame.draw.circle(screen, (255, 200, 15), (380, 380), 15)
+            paint_text("!", (255, 255, 255), None, 380, 380, "center", True, 22)
     elif state == "result":
         screen.blit(settings, (355, 0))
         pygame.draw.rect(screen, (100, 150, 255), (75, 300, 250, 75), 0, border_radius=20)
@@ -1119,7 +1115,8 @@ while True:
         paint_text(installed_language[selected_language][3], (255, 255, 255), (100, 150, 255), 200, 336, "center", True,
                    32)
         if new_version:
-            screen.blit(update, (360, 360))
+            pygame.draw.circle(screen, (255, 200, 15), (380, 380), 15)
+            paint_text("!", (255, 255, 255), None, 380, 380, "center", True, 22)
     elif state == "start":
         screen.blit(settings, (355, 0))
         pygame.draw.rect(screen, (100, 150, 255), (75, 300, 250, 75), 0, border_radius=20)
@@ -1128,7 +1125,8 @@ while True:
         paint_text(installed_language[selected_language][4], (255, 255, 255), (100, 150, 255), 200, 336, "center", True,
                    32)
         if new_version:
-            screen.blit(update, (360, 360))
+            pygame.draw.circle(screen, (255, 200, 15), (380, 380), 15)
+            paint_text("!", (255, 255, 255), None, 380, 380, "center", True, 22)
     if setting_open:
         if setting_x < should_setting:
             setting_x += 40
@@ -1222,7 +1220,8 @@ while True:
         ch_lan()
     pygame.draw.rect(screen, (248, 212, 212), (0, 400, 400, 50))
     pygame.draw.line(screen, (226, 101, 102), (0, 400), (400, 400))
-    screen.blit(Error, (7, 406))
+    pygame.draw.circle(screen, (255, 0, 0), (26, 426), 20)
+    paint_text("x", (255, 255, 255), None, 26, 421, "center", True, 36)
     if selected_language == "汉语":
         e_t = 20
         e_y = 0
