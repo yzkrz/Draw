@@ -47,6 +47,7 @@ his_open = False
 black_x = 400
 should_black = 400
 black_open = False
+txt_y = 0
 
 
 try:
@@ -480,10 +481,11 @@ def get():
                 if 150 <= x <= 250 and 250 <= y <= 300:
                     history_ok()
                 if 0 <= x <= 90 and 360 <= y <= 400:
-                    mor_his = open("more_his.html", "w")
-                    mor_his.write(str(l_list))
-                    mor_his.close()
-                    os.system('"more_his.html"')
+                    if txt_y > 220:
+                        mor_his = open("more_his.html", "w")
+                        mor_his.write(str(l_list))
+                        mor_his.close()
+                        os.system('"more_his.html"')
             if state == "blacking":
                 if 0 <= x <= 50 and 0 <= y <= 50:
                     if not black_error:
@@ -791,7 +793,7 @@ def fcl_ok():
 
 
 def history():
-    global his_x, should_his, state, setting_open, his_open, l_list
+    global his_x, should_his, state, setting_open, his_open, l_list, txt_y
     if his_x < should_his:
         his_x += 40
         if his_x >= 400:
